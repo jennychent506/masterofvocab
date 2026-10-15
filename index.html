@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>英單王集訓營</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f4f6f9;--card:#fff;--ink:#1b2a4a;--mute:#66728a;--line:#d5dbe6;--acc:#2447b8;--ok:#1d8a4e;--bad:#c33b3b;--okbg:#e4f5ea;--badbg:#fbe8e8}
+:root:not([data-theme=light]){}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#10151f;--card:#18202e;--ink:#e6ebf5;--mute:#93a0b8;--line:#2b364a;--acc:#7e9bff;--ok:#5fd18a;--bad:#ff8585;--okbg:#17352a;--badbg:#3a1f23}}
+:root[data-theme=dark]{--bg:#10151f;--card:#18202e;--ink:#e6ebf5;--mute:#93a0b8;--line:#2b364a;--acc:#7e9bff;--ok:#5fd18a;--bad:#ff8585;--okbg:#17352a;--badbg:#3a1f23}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
+main{max-width:720px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:1.6rem;margin:4px 0 2px}
+.sub{color:var(--mute);margin:0 0 16px;font-size:.92rem}
+.tabs{display:flex;gap:8px;margin-bottom:14px}
+.tabs button{flex:1}
+button,select{font:inherit;color:var(--ink);background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:9px 14px;cursor:pointer}
+button:hover{border-color:var(--acc)}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+button.on,button.pri{background:var(--acc);border-color:var(--acc);color:#fff}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.bar .sp{flex:1}
+.stat{color:var(--mute);font-size:.9rem}
+.prog{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-bottom:14px}
+.prog i{display:block;height:100%;background:var(--acc);width:0;transition:width .25s}
+.zh{font-size:1.5rem;font-weight:700}
+.pos{color:var(--mute);font-size:.9rem}
+.freq{display:inline-block;background:var(--badbg);color:var(--bad);border-radius:8px;padding:0 8px;font-size:.8rem;margin-left:6px}
+input[type=text]{width:100%;font:inherit;font-size:1.4rem;letter-spacing:.08em;padding:10px 12px;border:2px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);margin:12px 0}
+input.ok{border-color:var(--ok);background:var(--okbg)}input.bad{border-color:var(--bad);background:var(--badbg)}
+.hint{font-family:ui-monospace,Menlo,monospace;font-size:1.3rem;letter-spacing:.2em;color:var(--mute);min-height:1.8em}
+.row{display:flex;flex-wrap:wrap;gap:8px}
+.q{font-size:1.05rem;margin:0 0 14px}
+.opt{display:flex;gap:12px;align-items:center;width:100%;text-align:left;margin-bottom:8px;border-radius:12px}
+.opt b{flex:none;width:30px;height:30px;border-radius:50%;border:2px solid var(--mute);display:grid;place-items:center;font-size:.85rem;color:var(--mute)}
+.opt.pick b{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.opt.right{background:var(--okbg);border-color:var(--ok)}.opt.right b{background:var(--ok);border-color:var(--ok);color:#fff}
+.opt.wrong{background:var(--badbg);border-color:var(--bad)}.opt.wrong b{background:var(--bad);border-color:var(--bad);color:#fff}
+.fb{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--bg)}
+.tag{font-size:.8rem;color:var(--mute)}
+.res{text-align:center}.res .big{font-size:2.4rem;font-weight:700}
+.wl{margin:8px 0 0;padding:0;list-style:none;text-align:left;columns:2}
+.wl li{padding:2px 0;font-size:.95rem}
+.hide{display:none}.wi{display:flex;gap:8px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}.wi div{flex:1}.wi button{padding:4px 10px;font-size:.85rem}.cn{display:inline-block;background:var(--acc);color:#fff;border-radius:10px;padding:0 7px;font-size:.8rem;margin-left:6px}
+@media(max-width:480px){.wl{columns:1}}
+</style></head><body><main>
+<h1>英單王集訓營</h1>
+<p class="sub">題源：107–114 學年度英文單字比賽區域賽（拼寫字表取自 109–114 年決賽）。「考過 N 次」＝該字在 109–114 年拼寫題出現的次數；🔥＝3 次以上。詞彙題為依大考中心 4–6 級程度重新命題。</p>
+<div class="tabs"><button id="t1" class="on">單字拼寫</button><button id="t2">詞彙單選</button><button id="t3">錯題本<span id="bd"></span></button></div>
+
+<section id="p1">
+ <div class="bar">
+  <select id="sf" aria-label="範圍"><option value="3">超高頻（考過 3 次以上）</option><option value="2">高頻字（考過 2 次以上）</option><option value="1">全部單字</option><option value="w">錯題本</option></select>
+  <label class="stat"><input type="checkbox" id="cb" checked> 顯示字母數提示</label>
+  <span class="sp"></span><span class="stat" id="s1"></span>
+ </div>
+ <div class="prog"><i id="pg1"></i></div>
+ <div class="card" id="sc">
+  <div class="pos" id="pos"></div>
+  <div class="zh" id="zh"></div>
+  <div class="hint" id="hint"></div>
+  <input type="text" id="inp" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="輸入拼字後按 Enter" aria-label="拼字作答">
+  <div class="row"><button class="pri" id="chk">檢查</button><button id="say">🔊 聽發音</button><button id="hnt">提示一個字母</button><button id="skp">看答案 / 下一題</button></div>
+  <div class="fb hide" id="fb1"></div>
+ </div>
+</section>
+
+<section id="p2" class="hide">
+ <div class="bar">
+  <select id="mf" aria-label="範圍"><option value="all">全部題庫（每輪 30 題）</option><option value="h">高頻字（每輪 30 題）</option><option value="w">錯題本（換新題幹）</option></select>
+  <button id="mgo">重新出題</button><span class="sp"></span><span class="stat" id="s2"></span>
+ </div>
+ <div class="prog"><i id="pg2"></i></div>
+ <div class="card" id="mc"></div>
+</section>
+<section id="p3" class="hide"></section>
+</main>
+<script>
+const W=`hippopotamus|河馬|4
+exhibition|展覽|4
+unprecedented|空前的|4
+disciplinary|紀律的；跨學科的|4
+predecessor|前任者|3
+sovereignty|主權|4
+ambassador|大使|3
+cholesterol|膽固醇|3
+gymnasium|體育館|4
+squirrel|松鼠|4
+miscellaneous|雜項的|3
+indigenous|原住的|2
+adolescent|青少年|2
+contagious|傳染性的|2
+conscientious|認真盡責的|2
+lieutenant|中尉|3
+unanimous|一致同意的|2
+spontaneous|自發的|2
+luxurious|奢華的|2
+embarrassment|尷尬|2
+surveillance|監視|2
+maintenance|維護|2
+porcelain|瓷器|2
+suspicion|懷疑|2
+thorough|徹底的|2
+spinach|菠菜|3
+separate|分開|2
+dinosaur|恐龍|3
+temperature|溫度|2
+infrastructure|基礎建設|2
+attorney|律師|2
+committee|委員會|2
+entrepreneur|企業家|2
+handkerchief|手帕|2
+legitimate|合法的|2
+indispensable|不可或缺的|3
+guarantee|保證|2
+peninsula|半島|3
+bureaucrat|官僚|2
+hypocrite|偽君子|2
+sergeant|中士|2
+exaggerate|誇大|2
+brassiere|胸罩|2
+reminiscent|令人想起的|2
+anonymous|匿名的|1
+satellite|衛星|1
+spaghetti|義大利麵|1
+archaeology|考古學|1
+pneumonia|肺炎|2
+rhetoric|修辭|1
+eccentric|古怪的|1
+mayonnaise|美乃滋|1
+mustache|鬍子|1
+rhinoceros|犀牛|1
+cassette|卡式錄音帶|2
+treason|叛國罪|1
+abdomen|腹部|2
+playwright|劇作家|1
+architecture|建築|1
+masculine|男性的|1
+suffocate|使窒息|1
+vineyard|葡萄園|1
+plumber|水管工|1
+nuisance|討厭的人事物|2
+punctual|守時的|1
+pharmacy|藥局|1
+parachute|降落傘|1
+ingenuity|獨創力|1
+massacre|大屠殺|1
+mileage|里程|1
+sophomore|大二生|1
+accommodate|容納；提供住宿|1
+longitude|經度|2
+tedious|乏味的|1
+deteriorate|惡化|2
+acquisition|取得|1
+colloquial|口語的|1
+intimidate|恫嚇|1
+dilemma|兩難|1
+renaissance|文藝復興|1
+cupboard|碗櫥|1
+melancholy|憂鬱|1
+canyon|峽谷|1
+reservoir|水庫|1
+leopard|豹|1
+mortgage|抵押貸款|1
+assault|攻擊|1
+prominent|顯著的|1
+condemn|譴責|1
+circumstance|情況|1
+privilege|特權|1
+surgeon|外科醫生|1
+collision|碰撞|1
+exposure|暴露|1
+chronic|慢性的|1
+miniature|縮影|1
+asthma|氣喘|1
+catastrophe|大災難|1
+municipal|市的|1
+evacuate|撤離|1
+versatile|多才多藝的|1
+psychiatry|精神病學|1
+aesthetic|美學的|1
+eclipse|日蝕、月蝕|1
+diabetes|糖尿病|1
+casualty|傷亡|1
+cement|水泥|1
+lollipop|棒棒糖|1
+refrigerator|冰箱|1
+leisure|閒暇|1
+criteria|標準（複數）|1
+coherent|連貫的|1
+courtesy|禮貌|1
+descend|下降|1
+corridor|走廊|1
+eligible|合格的|1
+phenomenon|現象|1
+rhythm|節奏|1
+resemblance|相似|1
+apprentice|學徒|1
+detergent|清潔劑|1
+hurricane|颶風|1
+simultaneous|同時的|1
+incense|香|1
+shrewd|精明的|1
+asylum|庇護|1
+hormone|荷爾蒙|1
+fatigue|疲勞|1
+lumber|木材|1
+crooked|彎曲的|1
+binoculars|雙筒望遠鏡|2
+rehabilitate|使復原|1
+lettuce|萵苣|1
+juvenile|青少年|2
+scarcely|幾乎不|1
+bulletin|公告|1
+fertile|肥沃的|2
+franchise|經銷權|1
+federal|聯邦的|1
+ideology|意識形態|1
+equivalent|相等的|1
+aquarium|水族館|1
+sophisticated|複雜的；老練的|1
+propaganda|宣傳|1
+clearance|清除；許可|1
+obstinate|頑固的|1
+persevere|堅持|1
+pedestrian|行人|1
+rectangle|長方形|1
+sprinkle|灑|1
+pledge|誓言|1
+voucher|優惠券|1
+capsule|膠囊|1
+defiance|反抗|1
+endowment|捐贈；天賦|1
+successor|繼任者|1
+accumulate|累積|1
+nominee|被提名人|1
+redundancy|冗餘；裁員|1
+hierarchy|階層|1
+gospel|福音|1
+doctrine|教義|1
+catalogue|目錄|1
+diminish|減少|1
+explicit|明確的|1
+pronounce|發音|1
+outrageous|離譜的|1
+executive|主管|1
+convenience|便利|1
+obedience|服從|1
+foreigner|外國人|1
+statue|雕像|1
+ghost|鬼|1
+lettuce|萵苣|1
+boulevard|林蔭大道|1
+mayonnaise|美乃滋|1
+campaign|活動；發起運動|2
+separation|分離|2
+government|政府|1
+gorgeous|華麗的|1
+thermometer|溫度計|1
+buffet|自助餐|1
+utensil|器具|1
+sulfur|硫磺|1
+freight|貨運|1
+bureau|局、處|1
+realm|領域；王國|1
+vinegar|醋|1
+daffodil|水仙|1
+amateur|業餘者|1
+amiable|和藹可親的|1
+wrench|扳手|1
+inherent|與生俱來的|1
+parallel|平行的|1
+escalator|電扶梯|1
+discipline|紀律|1
+champagne|香檳|1
+dandruff|頭皮屑|1
+urine|尿|1
+hemisphere|半球|1
+awkward|笨拙的；尷尬的|1
+falter|蹣跚；動搖|1
+vehicle|車輛|1
+gobble|狼吞虎嚥|1
+brooch|胸針|1
+exterior|外部|1
+weary|疲倦的|1
+sovereign|君主|0`.split("\n").map(l=>{const[a,b,c]=l.split("|");return{w:a,z:b,f:+c}}).filter((x,i,a)=>x.f>0&&a.findIndex(y=>y.w==x.w)==i);
+const Q=`To encourage recycling, the supermarket gives customers a small cash ______ for every empty bottle they bring back.|incentive|penalty|boundary|verdict|incentive 誘因|4
+Despite everyone's advice and clear evidence, the ______ old man refused to change his mind or see a doctor.|obstinate|obedient|cordial|humble|obstinate 頑固的|4
+Because of rising ______, a bowl of noodles that cost fifty dollars last year now costs seventy.|inflation|interest|income|revenue|inflation 通貨膨脹|2
+Before launching the new drink, the company handed out free samples to ______ how customers would react to it.|gauge|gaze|boost|conceal|gauge 評估|2
+If your dog bites a stranger in the park, you may be held legally ______ for the medical bills.|liable|eligible|capable|vulnerable|liable for 對…負責|2
+Heavy rain and strong winds had an ______ effect on the harvest, and vegetable prices rose sharply.|adverse|diverse|reverse|adjacent|adverse effect 不利影響|2
+Selling souvenirs to tourists was such a ______ business that the family soon opened three more shops.|lucrative|luxurious|ludicrous|lukewarm|lucrative 賺錢的|2
+The doctor ordered the patient to be ______ to bed for two weeks so that his broken leg could heal.|confined|conformed|confirmed|conferred|be confined to 被限制於|2
+After hours of heated debate, the mayor finally ______ that her plan had serious flaws and needed changes.|conceded|insisted|denied|pretended|concede 承認|3
+The enemy army laid ______ to the castle for six months until its food and water ran out.|siege|ambush|assault|fortress|lay siege to 圍攻|2
+The sharp needle easily ______ the thick leather, and the tailor quickly pulled the thread through.|penetrated|permitted|persuaded|perceived|penetrate 穿透|2
+After winning five games in a row, the team had gained so much ______ that nobody expected them to lose.|momentum|monument|moment|motive|gain momentum 取得動能|3
+The two companies reached a ______ agreement, which may still change after the lawyers finish reviewing it.|tentative|permanent|obscure|sincere|tentative 暫定的|1
+Employees must keep customers' personal data strictly ______ and never share it with anyone outside the company.|confidential|confident|conscious|considerate|confidential 機密的|1
+He damaged her car out of pure ______, simply wanting to hurt her after their bitter quarrel.|spite|pity|haste|honor|out of spite 出於惡意|2
+You shouldn't drive after the party; wait until you are completely ______ and your head is clear again.|sober|solemn|sensible|silent|sober 清醒的|1
+Experts warn that the economy faces a ______ future if unemployment keeps rising and no new jobs appear.|grim|brisk|bulky|bright|grim 嚴峻的|3
+The nurse used a needle and thread to ______ up the deep cut on the boy's knee.|stitch|staple|stir|strap|stitch up 縫合|1
+Winning the Nobel Prize brought the university great ______ and attracted talented students from around the world.|prestige|prejudice|pressure|prospect|prestige 威望|1
+Passengers are kindly asked to ______ from smoking anywhere on the train, including the toilets.|refrain|prevent|prohibit|avoid|refrain from 避免|1
+The earthquake ______ terrible damage on the small town, leaving thousands of families without homes.|inflicted|afflicted|conflicted|inflated|inflict damage on 造成損害|1
+Many scientists ______ the sharp rise in obesity to fast food and a lack of exercise.|attribute|contribute|distribute|substitute|attribute A to B 歸因於|1
+Be ______ when you talk about your colleagues' private lives, because careless words can ruin friendships.|discreet|discrete|decent|devoted|discreet 謹慎的|1
+Students who get full marks on the midterm will be ______ from taking the final exam.|exempt|except|exceed|expel|exempt from 免除|1
+Hikers who ignore weather warnings do so at their own ______, for storms can arrive without notice.|peril|plight|pedal|pearl|at one's peril 自負風險|2
+After being cheated twice online, she became ______ of strangers offering cheap deals through social media.|wary|weary|weird|worthy|wary of 提防|1
+The new law is meant to ______ our safety rules with international standards so that exports are easier.|align|alter|assign|ally|align with 與…一致|1
+Whoever joins our club must ______ by its rules, whether or not they agree with every single one.|abide|abound|abuse|absorb|abide by 遵守|1
+The architect's plan looked beautiful, but it was not ______ because the city could not afford the cost.|feasible|plausible|flexible|visible|feasible 可行的|2
+Don't worry about parking: the hotel has ______ space for the cars of all two hundred guests.|ample|amateur|amiable|ambiguous|ample 充足的|3
+The inventor applied for a ______ on his new device so that no company could legally copy it.|patent|patient|pattern|payment|patent 專利|2
+A loaf of bread left uncovered on the table for a week becomes hard and ______.|stale|stable|static|sturdy|stale 不新鮮的|3
+Please be ______ when you check each page before sending the report, because even small mistakes matter.|thorough|through|though|tough|thorough 徹底的|4
+Because the waistband is ______, it stretches easily and returns to its original shape after you let go.|elastic|plastic|fantastic|drastic|elastic 有彈性的|1
+Although he is a famous scientist, he remains ______ and never boasts about his many achievements.|humble|humid|humane|humorous|humble 謙虛的|1
+The new scale is so ______ that it can show your weight correctly to the nearest gram.|accurate|accustomed|acute|adequate|accurate 精確的|2
+The fire was no accident; police believe it was a ______ attempt to destroy the evidence.|deliberate|desperate|delicate|definite|deliberate 蓄意的|2
+Lack of money is the biggest ______ to our plan, so we must find sponsors first.|obstacle|obligation|occasion|oracle|obstacle to 的障礙|3
+Long night shifts left the nurses in a state of extreme physical and mental ______.|fatigue|fatality|fascination|faculty|fatigue 疲勞|2
+Only the owner has a ______ claim to the land, and the court papers prove it.|legitimate|legendary|literal|lucrative|legitimate 合法的|3
+Although he knew he was right, Tom had to ______ his pride and apologize to his boss.|swallow|chew|bite|taste|swallow one's pride 忍辱|1
+The comedian told ______ jokes full of rude words, and parents were shocked that children were listening.|vulgar|vigorous|vacant|vivid|vulgar 粗俗的|2
+The government offers tax breaks as an ______ to encourage companies to hire more young people.|incentive|obligation|inspection|instinct|incentive 誘因|4
+She was too ______ to admit her mistake, even when her teammates showed her the video proof.|obstinate|obscure|obsolete|obedient|obstinate 頑固的|4
+The central bank raised interest rates to bring ______ down, since food and housing prices kept climbing.|inflation|inspiration|information|infection|inflation 通貨膨脹|2
+It is difficult to ______ his true feelings because his face shows almost no emotion at all.|gauge|gamble|gather|gaze|gauge 評估|2
+The company is ______ for the injuries because it failed to repair the broken stairs in time.|liable|likely|reliable|lovable|liable for 對…負責|2
+Patients should report any ______ reactions to the medicine, such as rashes, dizziness, or difficulty breathing.|adverse|averse|diverse|inverse|adverse effect 不利影響|2
+Many young engineers leave small firms for ______ jobs abroad that pay three times as much.|lucrative|literate|luminous|lenient|lucrative 賺錢的|2
+The new rule does not ______ itself to big cities; it applies to every small village as well.|confine|confide|conform|confuse|be confined to 被限制於|2
+Trailing by two points, the coach refused to ______ defeat and urged his players to keep fighting.|concede|conceive|conceal|condense|concede 承認|3
+The city survived a long ______, living on rationed bread while enemy soldiers surrounded its walls.|siege|seizure|sphere|shelter|lay siege to 圍攻|2
+Sunlight cannot ______ the deep ocean, so the water below a thousand meters is completely dark.|penetrate|participate|perspire|penalize|penetrate 穿透|2
+The protest began with a few students, but it soon gathered ______ and drew thousands of supporters.|momentum|moisture|monopoly|mortgage|gain momentum 取得動能|3
+I have made a ______ plan to visit you in May, but I will confirm the date later.|tentative|tedious|temporary|tolerant|tentative 暫定的|1
+The doctor said all patient records are ______, so no one else can read them without permission.|confidential|confident|conventional|contagious|confidential 機密的|1
+She told the lie purely out of ______, hoping to ruin her rival's reputation in front of everyone.|spite|spice|spine|speed|out of spite 出於惡意|2
+He was ______ enough to drive home, having drunk only a glass of orange juice all night.|sober|sour|sore|solid|sober 清醒的|1
+The doctor's ______ face told us the bad news before he spoke a single word.|grim|grin|gray|grand|grim 嚴峻的|3
+As the proverb says, a ______ in time saves nine, so fix small problems before they grow.|stitch|switch|stretch|sketch|stitch up 縫合|1
+Doctors enjoy high social ______ in many countries, which is why parents want their children to study medicine.|prestige|prejudice|privilege|presence|prestige 威望|1
+Please ______ from using your phone during the concert, out of respect for the musicians and audience.|refrain|retreat|resist|refuse|refrain from 避免|1
+The bully enjoyed trying to ______ pain on weaker classmates until the teacher finally stepped in.|inflict|afflict|infect|inject|inflict damage on 造成損害|1
+Many people ______ their success to luck, but it usually comes from years of steady effort.|attribute|contribute|distribute|substitute|attribute A to B 歸因於|1
+Sarah is trusted with secrets because she is ______ and never gossips about what she hears.|discreet|discrete|decent|dreadful|discreet 謹慎的|1
+Children under six are ______ from paying the entrance fee at the museum.|exempt|except|expert|extreme|exempt from 免除|1
+The explorers pressed on into the jungle, aware that every step put their lives in ______.|peril|period|pearl|penalty|at one's peril 自負風險|2
+Be ______ of emails that ask for your password, because they are often scams.|wary|weary|wiry|wavy|wary of 提防|1
+The two parties decided to ______ themselves with farmers to win more votes in the countryside.|align|assign|alarm|allow|align with 與…一致|1
+I cannot ______ by a decision that was made without asking the people it affects.|abide|abuse|abound|abolish|abide by 遵守|1
+Engineers say the tunnel is technically ______, but it would take twenty years and huge funding.|feasible|fertile|fragile|famous|feasible 可行的|2
+We have ______ time before the train leaves, so there is no need to rush.|ample|ankle|apple|angle|ample 充足的|3
+Once the ______ expires, other companies can legally produce cheaper versions of the medicine.|patent|patient|parent|pattern|patent 專利|2
+The cake tasted ______ because it had been sitting in the cupboard since last week.|stale|steady|stable|stare|stale 不新鮮的|3
+The detective made a ______ search of the room, checking under the floor and behind every picture.|thorough|thought|through|throat|thorough 徹底的|4
+The ______ rope stretched to twice its length when the climber fell, softening the shock.|elastic|electric|elegant|enthusiastic|elastic 有彈性的|1
+Born into a ______ family with no electricity, he later became the country's leading surgeon.|humble|humid|humane|hostile|humble 謙虛的|1
+Only an ______ measurement of the window will make sure the new curtain fits perfectly.|accurate|adequate|abrupt|absolute|accurate 精確的|2
+It was not a slip of the tongue; he made a ______ choice to hide the truth.|deliberate|desperate|definite|delicate|deliberate 蓄意的|2
+A fallen tree was the first ______ on the road, and the drivers had to turn back.|obstacle|observer|obedience|oracle|obstacle to 的障礙|3
+Drivers suffering from ______ should pull over and rest, because exhaustion causes many serious accidents.|fatigue|fatality|fiction|fault|fatigue 疲勞|2
+Opposition parties say the election was unfair, so many citizens doubt whether the new government is ______.|legitimate|literate|literal|legendary|legitimate 合法的|3
+It was hard to ______ the insult, but she smiled and kept quiet during the whole meeting.|swallow|swell|sweep|swing|swallow one's pride 忍辱|1
+Her grandmother disliked the movie because the ______ language made her feel uncomfortable.|vulgar|vivid|vacant|violent|vulgar 粗俗的|2
+Journalists often ______ catchy new words, such as "staycation", to describe changes in daily life.|coin|coil|coach|crack|coin a word 創造新詞|1
+Heart doctors recommend ______ exercise, such as brisk walking, rather than exhausting sports, for older patients.|moderate|modern|modest|mobile|moderate 適度的|2
+It took the teacher a whole summer to ______ the students' short stories into a single book.|compile|compel|compose|compete|compile 編纂|1
+If neither side backs down, the quarrel over the border may ______ into open war.|escalate|evacuate|elevate|exaggerate|escalate 升高|1
+Without anchors, the empty boats began to ______ out to sea with the tide.|drift|drain|drag|drill|drift 漂流|1
+Only the president has the power to ______ a new law; the congress then votes on it.|initiate|imitate|irritate|inherit|initiate 發起|2
+After years of silence, the two brothers finally met and agreed to ______ their differences.|reconcile|reclaim|recruit|reveal|reconcile 使一致|2
+He saves part of his salary each month so that he can live comfortably on his ______ after retiring.|pension|passion|mansion|portion|pension 退休金|2
+Because of her honesty, all her colleagues hold her in high ______.|esteem|estate|steam|stereo|hold in high esteem 尊敬|2
+The United Nations may impose economic ______ on any country that breaks the peace agreement.|sanctions|sanctuaries|sanitation|sandwiches|sanctions 制裁|1
+Many countries have decided to ______ the death penalty, believing no government has the right to take a life.|abolish|absorb|abuse|abbreviate|abolish 廢除|2
+Facing heavy fire from every side, the soldiers had no choice but to ______ and look for a safer position.|retreat|retire|retain|rebel|retreat 撤退|2
+When the police arrived, the angry crowd began to ______ and people quickly walked away in different directions.|disperse|dispatch|display|dispute|disperse 驅散|2
+Farmers hope the new seeds will ______ twice as much rice as the old ones, even in dry weather.|yield|yell|yearn|yawn|yield 生產；屈服|2
+Constant criticism from her parents began to ______ her confidence until she was afraid to speak in class.|undermine|underline|undertake|underestimate|undermine 暗中損害|1
+Customers were ______ when the airline refused to pay them back after canceling the flight without warning.|indignant|ignorant|indifferent|innocent|indignant 憤慨的|2
+The memory of the terrible accident continued to ______ him for years, and he often woke up at night.|haunt|hunt|halt|hasten|haunt 縈繞心頭|1
+The new neighbors were met with ______ and cold stares because the villagers distrusted all strangers.|hostility|hospitality|humility|hostage|hostility 敵意|2
+His pocket had a ______ because he had stuffed it with candy, and everyone could see it.|bulge|budge|bruise|bundle|bulge 凸起|2
+The knife is too ______ to cut the meat, so please sharpen it before dinner.|blunt|brisk|bulky|blank|blunt 鈍的；直率的|1
+The ______ fox pretended to be dead until the farmer turned away, then ran off with a chicken.|cunning|curious|cautious|cruel|cunning 狡猾的|1
+The country warned that it would ______ with equal force if its ships were attacked again.|retaliate|retain|reinforce|relieve|retaliate 報復|2
+After years of planning, the young couple were ready to ______ on a round-the-world journey by sailboat.|embark|embrace|embarrass|embody|embark on 著手|1
+Gambling and heavy drinking were once considered ______ that could destroy a man's family and reputation.|vices|virtues|voices|visions|vice 惡習|1
+Surviving three days without water in the desert was a terrible ______ that he never forgot.|ordeal|orchard|orbit|ornament|ordeal 磨難|1
+The photos of the refugees' ______ moved people around the world to donate food and clothing.|plight|flight|fright|blight|plight 困境|1
+Two police cars will ______ the president's car through the crowded city center to the airport.|escort|escape|exert|exile|escort 護送|1
+Despite his ______ goal of becoming prime minister, he started his career by delivering mail.|lofty|lonely|lovely|lowly|lofty 崇高的|2
+The mother made a ______ search of the crowded mall after she realized her son was missing.|frantic|fantastic|fragile|frank|frantic 狂亂的|2
+The smell of fresh bread seemed to ______ in the kitchen long after the oven was turned off.|linger|lounge|limp|lure|linger 逗留|1
+Honest people ______ those who cheat on exams, as it is unfair to students who study hard.|despise|devise|deprive|despair|despise 鄙視|2
+The factory will ______ production next month, and about three hundred workers will lose their jobs.|cease|seize|cheer|chase|cease 停止|1
+Police had to ______ traffic to side streets because a water pipe had burst on the main road.|divert|diverse|divorce|devote|divert 使轉向|2
+Pharmacists are only allowed to ______ strong medicines when the patient shows a doctor's prescription.|dispense|dispose|display|disguise|dispense 配發|2
+His anger began to ______ itself in small ways, such as slamming doors and refusing to speak.|manifest|manipulate|mention|maintain|manifest 顯現|2
+We spent the weekend in a ______ village by the lake, where there was no traffic and no noise.|tranquil|tropical|transparent|trivial|tranquil 寧靜的|2
+The ______ student reviews every lesson each evening, which is why she always ranks first.|diligent|dignified|dependent|diverse|diligent 勤勉的|1
+The final question was so ______ that even the best students needed a long time to solve it.|tricky|trendy|trivial|tropical|tricky 棘手的|2
+They get along well because of their ______ respect, and neither of them tries to control the other.|mutual|mature|mental|moral|mutual 互相的|1
+The company set up a hotline so that workers can report sexual ______ without fear of losing their jobs.|harassment|harvest|harmony|hardship|harassment 騷擾|1
+The manager was arrested for ______ after he used fake documents to take millions from investors.|fraud|fraction|fracture|fragment|fraud 詐騙|1
+During the economic ______, many shops closed down and thousands of workers could not find new jobs.|recession|reception|recipe|reaction|recession 經濟衰退|1
+The two neighbors had a long ______ over where one garden ended and the other began.|dispute|dispatch|disguise|display|dispute 爭執|1
+The law will ______ all drivers to wear seat belts, whether they feel comfortable or not.|compel|compile|compete|compare|compel 迫使|1
+In the end, justice will ______, and the guilty will be punished no matter how rich they are.|prevail|prevent|prepare|provoke|prevail 獲勝；盛行|2
+After three defeats in a row, the team's ______ was low and no one wanted to practice.|morale|moral|mortal|morsel|morale 士氣|1
+Don't ______ in sweets every day, or you will gain weight and ruin your teeth.|indulge|indicate|induce|infer|indulge in 沉溺於|1
+World leaders gathered to ______ the attack and promised to work together to prevent another.|condemn|contend|conduct|conceive|condemn 譴責|2
+Even though he was poor, he kept his ______ and never begged for help from anyone.|dignity|dynasty|density|diligence|dignity 尊嚴|1
+The salesman swore the bag was made of ______ leather, but it fell apart after one week.|genuine|generous|general|gorgeous|genuine 真正的|1
+Driving alone on the long, straight highway, he fought the ______ by singing and listening to audiobooks.|monotony|monopoly|monarchy|monument|monotony 單調|1
+I am ______ about his story because several details do not match what the witnesses said.|dubious|obvious|devious|ambitious|dubious 懷疑的|1
+After cheering for three hours at the game, the fans went home with ______ voices.|hoarse|horse|coarse|hollow|hoarse 沙啞的|3
+A terrible fire could ______ the whole forest within days if the winds do not stop.|ravage|rummage|rescue|ramble|ravage 蹂躪|2
+In the dark room, he had to ______ for the light switch with his hands.|grope|glare|glance|grind|grope for 摸索|1
+You must ______ the dirty pot with a hard brush, or the burnt food will never come off.|scrub|spread|stoop|strike|scrub 刷洗|2
+My grandmother used to ______ our torn socks with needle and thread instead of throwing them away.|mend|mind|melt|mark|mend 修補|2
+The party attracts voters from across the political ______, from farmers to factory workers to teachers.|spectrum|spectacle|species|spirit|spectrum 範圍；光譜|2
+Each ______ of corn is wrapped inside a tough skin and can be popped into a light, white snack.|kernel|colonel|channel|kennel|kernel 穀粒；核心|1
+Police uncovered a ______ to rob the bank, in which five men had secretly planned every detail.|conspiracy|conservation|consequence|constellation|conspiracy 陰謀|3
+The army plans to ______ ten thousand young men and women this year to fill its empty positions.|recruit|resume|reduce|retrieve|recruit 招募|1
+The astronauts go through ______ training for two years, and anyone who fails any test is dropped.|rigorous|ridiculous|rugged|spacious|rigorous 嚴格的|1
+Some advertisements ______ children's feelings so that they will beg their parents to buy the product.|manipulate|manufacture|maintain|multiply|manipulate 操縱|2
+A sudden ______ in demand for face masks caused shortages in every pharmacy during the outbreak.|surge|surgeon|surface|surplus|surge 激增|1
+Slipping on the icy steps, the old man began to ______ down the stairs and ended up with a broken arm.|tumble|tremble|tangle|tackle|tumble 跌倒；暴跌|2
+Students must ______ to the school's dress code, or they will not be allowed to enter the classroom.|conform|confirm|confess|conduct|conform to 遵守|1
+Don't make a ______ judgment; wait until you hear both sides of the story before you blame anyone.|hasty|handy|hairy|healthy|hasty 倉促的|1
+Safety is the ______ concern for every airline, which is why pilots repeat the same checks before takeoff.|cardinal|cordial|casual|capable|cardinal 首要的|1
+Share prices began to ______ sharply after the company admitted it had hidden huge losses.|plunge|plunder|plow|plague|plunge 驟降|1
+A fierce storm forced the ship to ______ and wait in the harbor until the wind calmed down.|halt|hatch|haunt|hurl|halt 停止|1
+Fishermen ______ their heavy nets onto the deck every morning, and the work leaves their arms sore.|haul|hail|hint|heal|haul 用力拖拉|1
+Both countries hope to ______ closer ties through trade, student exchange, and joint research projects.|forge|forgive|forbid|forfeit|forge ties 建立（關係）|1
+The princess gave a ______ nod to the guests, thanking them politely for coming to her birthday.|gracious|gorgeous|glorious|greedy|gracious 親切有禮的|3
+Parents often give teenagers a weekly ______, hoping they will learn how to manage their own money.|allowance|allergy|alliance|appliance|allowance 零用錢；津貼|1
+After an ______ two-week training camp with daily exercises, the swimmers were ready for the national contest.|intensive|extensive|expensive|intentional|intensive 密集的|1
+The ______ similarity between the two paintings made experts suspect that one artist had copied the other.|striking|strict|strong|stable|striking 驚人的|1
+The shop's ______ weight, including the heavy box, was ten kilos, but the cereal itself weighed only eight.|gross|gloss|grim|gruesome|gross 總的|1
+Spring is the ______ time to visit the island, when flowers are in bloom and the weather is mild.|prime|prize|prior|prone|prime 最佳的；首要的|1
+Your essay has good ideas, but it is not ______ because the paragraphs follow no logical order.|coherent|cooperative|cozy|cultural|coherent 連貫的|2
+The government plans to ______ checks on food factories after several customers became sick from bad milk.|intensify|identify|intend|inspire|intensify 加強|1
+Officials ordered a ______ into the cause of the fire, which destroyed the old market in two hours.|probe|probation|profile|prospect|probe 調查|1
+Agriculture has long been the economic ______ of the region, providing jobs for more than half its people.|pillar|pillow|pilot|pioneer|pillar 支柱|1
+Several small countries formed an ______ so that they could defend themselves if a powerful neighbor attacked.|alliance|appliance|allowance|alloy|alliance 聯盟|2
+There is a clear ______ between what the minister said in public and what he did in private.|contradiction|contribution|contraction|convention|contradiction 矛盾|1
+It is illegal for any employer to ______ against job seekers because of their age, race, or gender.|discriminate|dominate|deteriorate|demonstrate|discriminate against 歧視|1
+Two officers were ordered to ______ guard outside the museum overnight, in case the thieves returned.|mount|mourn|mingle|mutter|mount guard 站崗|1
+After a clumsy first month, the new coach hit his ______ and led the team to five straight wins.|stride|strike|strip|strain|hit one's stride 進入狀況|1
+The film is so ______ in showing the war's violence that many parents refuse to let teens watch it.|brutal|brilliant|brisk|bitter|brutal 殘酷的|1
+Ben donated his old bicycle to the charity, and his sister ______ gave away several of her toys.|likewise|otherwise|meanwhile|however|likewise 同樣地|1
+The court cannot give the final ruling while several important documents are still ______ and not yet submitted.|pending|pleasant|ending|spending|pending 待決的|1
+A ______ report suggests the bridge is unsafe, but engineers need more tests before reaching a final conclusion.|preliminary|premium|precious|primitive|preliminary 初步的|1
+Climbing the snowy peak without oxygen tanks is a ______ challenge, even for experienced mountaineers.|formidable|favorable|flexible|fortunate|formidable 艱鉅的|3
+Although shy, the young writer proved quite ______ in interviews, choosing precise words to explain her ideas.|articulate|artificial|aggressive|apparent|articulate 口才好的|1
+The contract's ______ wording led to a quarrel, since each side read the key sentence differently.|ambiguous|ambitious|amiable|abundant|ambiguous 模稜兩可的|1
+The donor wishes to remain ______, so the charity will not announce his name or show his photo.|anonymous|enormous|ominous|autonomous|anonymous 匿名的|3
+Don't judge him by his age; he is perfectly ______ of managing the whole project on his own.|capable|culpable|capital|comparable|capable of 有能力的|1
+The minister tried to ______ the reporter's question by changing the subject to the weather.|dodge|dote|dread|drain|dodge 閃避|2
+Our class cleans the library on ______ days, so my group works on Monday and the next group on Tuesday.|alternate|alternative|automatic|alleged|alternate 隔一個的|2
+The room was quiet except for the ______ cough of a student in the back row.|occasional|occupational|emotional|optional|occasional 偶爾的|1
+The fishing ______ left the harbor at dawn, carrying twelve crew members and enough fuel for ten days.|vessel|vehicle|vase|veteran|vessel 船隻|1
+Within hours, the false rumor began to ______ on social media, and thousands of people shared it.|circulate|calculate|celebrate|cultivate|circulate 流傳|1
+Smart farmers ______ every drop of rainwater by collecting it in tanks for the dry season.|utilize|utter|urge|undo|utilize 利用|1
+Because of the fog, traffic on the highway came to a ______ standstill, with cars barely moving at all.|virtual|virtuous|visual|virtue|virtual 幾乎的；虛擬的|1
+Doctors say that twenty minutes of ______ exercise, such as running, can improve heart health quickly.|vigorous|vicious|various|virtuous|vigorous 精力旺盛的；激烈的|2
+Angry farmers, tired of heavy taxes, rose in ______ against the king and marched on the capital.|revolt|revenue|revival|remedy|revolt 反抗|2
+Standing in ______ of the police order, the protesters refused to leave the square.|defiance|deficiency|reliance|alliance|in defiance of 公然違抗|2
+The instructions were so ______ that even skilled technicians could not understand how to turn the machine on.|obscure|obvious|obedient|obsolete|obscure 晦澀的；不知名的|2
+He screamed in ______ as the doctor pressed on his broken leg, and tears ran down his face.|agony|agency|agenda|ancestry|agony 極度痛苦|2
+She turned away in ______ at the rotten smell coming from the garbage truck, covering her nose.|disgust|disguise|distress|discount|disgust 厭惡|1
+Losing his home and savings in the flood, the old farmer sank into ______ and stopped talking to anyone.|despair|desire|dispute|deposit|despair 絕望|1
+Many cultures once treated women as ______ to men, which left them with fewer chances to study and work.|inferior|superior|interior|exterior|inferior to 次等的|2
+I have to run an ______ for my mother and buy some eggs and milk before the shop closes.|errand|error|arrow|energy|run an errand 跑腿|2
+The flood victims were given ______ homes in trailers until their houses could be repaired.|temporary|temperate|tentative|talented|temporary 暫時的|2
+The ______ reason for the delay was the weather, though a shortage of workers also played a part.|principal|principle|prominent|punctual|principal 主要的|1
+The advertising team tried to ______ a clever slogan that would stick in shoppers' minds long after they left the store.|coin|cope|coax|cling|coin a word 創造新詞|1
+Eating a ______ amount of chocolate is fine, but a whole box every day will harm your health.|moderate|mature|motor|mutual|moderate 適度的|2
+Volunteers will ______ a list of every local restaurant, including addresses and opening hours, for the tourist guidebook.|compile|compete|complain|commit|compile 編纂|1
+Rising prices and low wages could ______ into riots if the government fails to act quickly.|escalate|escape|elevate|eliminate|escalate 升高|1
+Exhausted and without a paddle, the campers let the canoe ______ along the quiet river.|drift|drown|drag|drip|drift 漂流|1
+The new manager decided to ______ monthly meetings so that employees could share ideas more openly.|initiate|inhabit|inspect|imitate|initiate 發起|2
+It took months before the neighbors could ______ and become friends again after their loud quarrel over the fence.|reconcile|rehearse|resemble|reclaim|reconcile 使一致|2
+Her grandfather worked for the railway for forty years and now receives a small ______ every month.|pension|pressure|portion|passion|pension 退休金|2
+The retired principal is held in high ______ by former students, who still visit and write to him.|esteem|steam|estate|errand|hold in high esteem 尊敬|2
+Many countries stopped buying the dictator's oil, and the trade ______ gradually destroyed his country's economy.|sanctions|sanctuaries|salaries|sacrifices|sanctions 制裁|1
+Slavery was finally ______ in the United States in the nineteenth century after a long and bloody war.|abolished|absorbed|abused|abbreviated|abolish 廢除|2
+Every summer the writer leaves the noisy city for a quiet mountain ______ where he can think and work.|retreat|retort|retail|reward|retreat 撤退|2
+As soon as the rain began to fall, the crowd at the outdoor concert started to ______ and hurried home.|disperse|disguise|dismiss|distinguish|disperse 驅散|2
+Under the pressure of public opinion, the mayor finally had to ______ and cancel the unpopular tax.|yield|resign|revise|retort|yield 生產；屈服|2
+The ______ teacher demanded an apology after a student accused her, without evidence, of changing his grades.|indignant|indifferent|ignorant|intelligent|indignant 憤慨的|2
+Years of ______ between the two families made it impossible for them to sit at the same table.|hostility|hospitality|humidity|humility|hostility 敵意|2
+Beneath his coat, a ______ near the waist showed that he was hiding something large.|bulge|budge|bargain|bubble|bulge 凸起|2
+If you hit him, he may ______ by spreading rumors about you at school.|retaliate|reinforce|relieve|remark|retaliate 報復|2
+Mountain climbers admire the ______ peaks that rise far above the clouds.|lofty|lonely|lazy|lucky|lofty 崇高的|2
+With only five minutes left before the deadline, she typed at a ______ speed, ignoring every message.|frantic|fantastic|friendly|frozen|frantic 狂亂的|2
+Teachers ______ students who copy others' homework, but they pity those who copy because they are afraid.|despise|desire|deserve|devote|despise 鄙視|2
+The pilot had to ______ the plane to another airport when thick fog covered the city.|divert|diverse|dismiss|disturb|divert 使轉向|2
+This machine will ______ hot coffee or tea as soon as you insert a coin.|dispense|dispatch|disperse|display|dispense 配發|2
+The first signs of the disease often ______ themselves as a mild fever and a sore throat.|manifest|manage|mention|migrate|manifest 顯現|2
+After a stressful week, nothing is better than a walk along the ______ beach at sunrise.|tranquil|trivial|tropical|tremendous|tranquil 寧靜的|2
+Parking in the old town is ______ because the streets are narrow and most are one-way.|tricky|trendy|trivial|thrifty|tricky 棘手的|2
+Despite many obstacles, our team's patient effort will ______ in the end, so don't give up.|prevail|prevent|preside|provide|prevail 獲勝；盛行|2
+The newspaper's editor was quick to ______ the violence and called on both sides to talk.|condemn|condense|contend|contest|condemn 譴責|2
+After shouting at the concert all night, her voice was too ______ to answer the phone.|hoarse|horse|coarse|harsh|hoarse 沙啞的|3
+Locusts can ______ a whole field of wheat in a single afternoon, leaving farmers with nothing.|ravage|rummage|rejoice|renew|ravage 蹂躪|2
+Before surgery, doctors must ______ their hands and arms for several minutes with special soap.|scrub|scream|scratch|screw|scrub 刷洗|2
+The shoemaker will ______ the broken heel so that you can wear the boots again.|mend|mind|mount|merge|mend 修補|2
+The festival offers a wide ______ of music, from classical orchestras to heavy metal bands.|spectrum|spectacle|specimen|spirit|spectrum 範圍；光譜|2
+Some people believe the moon landing was a ______ by the government, although scientists have disproved it.|conspiracy|conservation|consensus|constitution|conspiracy 陰謀|3
+Cunning politicians often ______ statistics to make their failures look like successes.|manipulate|manufacture|multiply|monitor|manipulate 操縱|2
+The price of oil began to ______ after several countries decided to produce much more of it.|tumble|tremble|stumble|tackle|tumble 跌倒；暴跌|2
+Even after losing the election, she was ______ enough to congratulate her opponent in public.|gracious|generous|gorgeous|glorious|gracious 親切有禮的|3
+The witness was so shocked that he could not give a ______ account of what had happened.|coherent|cooperative|content|coastal|coherent 連貫的|2
+During the war, the two nations kept a military ______ and promised to help each other if attacked.|alliance|alloy|allowance|appliance|alliance 聯盟|2
+Her ______ reputation as a strict judge made even the best lawyers nervous before entering her court.|formidable|forgettable|favorable|fortunate|formidable 艱鉅的|3
+The police received an ______ phone call, but the caller refused to give a name.|anonymous|enormous|ambiguous|autonomous|anonymous 匿名的|3
+The basketball player managed to ______ two defenders and score from under the net.|dodge|dive|drown|draft|dodge 閃避|2
+The two sisters ______ weekends at their grandmother's house: one goes this week, the other next week.|alternate|alternative|alienate|alert|alternate 隔一個的|2
+The old man is still in ______ health, climbing the hill every morning without even breathing hard.|vigorous|vicious|vivid|vague|vigorous 精力旺盛的；激烈的|2
+The soldiers began to ______ against their commander after months without food or pay.|revolt|resolve|revive|retain|revolt 反抗|2
+She wore the banned symbol in open ______ of the school rules, hoping to start a debate.|defiance|reliance|deficiency|compliance|in defiance of 公然違抗|2
+A little-known and ______ poet at that time, he died poor, but his poems became famous later.|obscure|obvious|obedient|obstinate|obscure 晦澀的；不知名的|2
+The patient lay in ______ all night until the nurse finally gave him stronger medicine for the pain.|agony|agency|ambition|agenda|agony 極度痛苦|2
+He never felt ______ to his richer classmates because his parents taught him that character matters more than wealth.|inferior|interior|inherent|invisible|inferior to 次等的|2
+On her way home, she ran a quick ______ to the post office to mail the package.|errand|error|erupt|era|run an errand 跑腿|2
+This is only a ______ job for the summer; I will return to university in September.|temporary|tempting|terrific|typical|temporary 暫時的|2
+Rumors about his honesty began to ______ the voters' trust in the mayor before the election.|undermine|underline|undertake|underestimate|undermine 暗中損害|1
+Old villagers say the ghost of a drowned girl still comes to ______ the empty house by the river.|haunt|hunt|halve|hatch|haunt 縈繞心頭|1
+She is so ______ that she tells people exactly what she thinks, even when the truth hurts.|blunt|blank|brisk|bashful|blunt 鈍的；直率的|1
+The thief was too ______ to be caught easily; he changed his clothes and route every single day.|cunning|curious|crowded|calm|cunning 狡猾的|1
+Just before graduating, Lily decided to ______ on a career in medicine, despite her parents' worries.|embark|embrace|embarrass|employ|embark on 著手|1
+Laziness is a ______ that can ruin a promising young man, while hard work is a virtue.|vice|voice|vision|vase|vice 惡習|1
+For the hostages, the long ______ ended only when the army finally entered the building and freed them.|ordeal|ordinance|orbit|oral|ordeal 磨難|1
+The mayor promised to improve the ______ of homeless families before the cold winter arrived.|plight|slight|plot|plank|plight 困境|1
+A guard will ______ the visitors through the secret tunnel to the king's private room.|escort|escape|exchange|expose|escort 護送|1
+Some tourists ______ in the museum shop for an hour, reluctant to leave without a souvenir.|linger|lend|leap|lecture|linger 逗留|1
+The two armies agreed to ______ fire at midnight so that the peace talks could begin.|cease|seize|chase|cherish|cease 停止|1
+Thanks to his ______ work over four years, the farmer turned barren land into a rich orchard.|diligent|delicate|dependent|distant|diligent 勤勉的|1
+The two firms signed a deal that brings ______ benefits, since both sides gain from it.|mutual|mature|mental|musical|mutual 互相的|1
+Online ______ can make victims afraid to log in, since attackers send hateful messages again and again.|harassment|harvest|harness|hardship|harassment 騷擾|1
+Be careful when strangers ask for your bank details; it may be a ______ to steal your money.|fraud|frame|fraction|freight|fraud 詐騙|1
+Many young graduates struggled to find work during the global ______, as companies stopped hiring.|recession|recipe|reception|recovery|recession 經濟衰退|1
+The workers will go on strike if the ______ over wages cannot be settled by Friday.|dispute|dispatch|display|distance|dispute 爭執|1
+No one can ______ you to sign the contract if you do not agree with its terms.|compel|compile|compare|complain|compel 迫使|1
+The coach's encouraging speech lifted the players' ______, and they came back to win the game.|morale|moral|mortal|morning|morale 士氣|1
+On holidays, I like to ______ in a long bath and a good novel without checking my phone.|indulge|indicate|include|insist|indulge in 沉溺於|1
+Treat every worker with ______, whether he sweeps the floor or runs the company.|dignity|density|dynasty|diversity|dignity 尊嚴|1
+Her ______ concern for the patients was clear when she stayed late to comfort a frightened child.|genuine|general|generous|gentle|genuine 真正的|1
+Factory work involves the ______ of repeating the same movement thousands of times a day.|monotony|monopoly|monitor|moisture|monotony 單調|1
+You should be ______ about any website that promises to make you rich overnight without any effort.|dubious|devious|vicious|anxious|dubious 懷疑的|1
+Without his glasses, the old man had to ______ for the phone on the crowded table.|grope|growl|grumble|gulp|grope for 摸索|1
+A single ______ of the nut is hidden inside a hard shell that is difficult to crack.|kernel|colonel|funnel|kennel|kernel 穀粒；核心|1
+The company plans to ______ fifty engineers next year to work on its new electric cars.|recruit|recycle|reject|release|recruit 招募|1
+Every applicant must pass a ______ test, and only five percent have ever succeeded.|rigorous|rugged|rural|ridiculous|rigorous 嚴格的|1
+A sudden ______ of electricity burned out the old fridge in the middle of the night.|surge|surgeon|surface|surplus|surge 激增|1
+New members are expected to ______ to the rules of the club or leave it.|conform|confirm|confront|convince|conform to 遵守|1
+After a ______ breakfast of two slices of toast, he ran to catch the bus.|hasty|handy|healthy|honest|hasty 倉促的|1
+Never leave a pan of hot oil unattended: it is the ______ rule of safe cooking.|cardinal|cordial|capital|casual|cardinal 首要的|1
+Temperatures can ______ below zero overnight in the desert, even if the day was hot.|plunge|plunder|plug|plot|plunge 驟降|1
+The referee blew his whistle to ______ the game after a player fell and did not get up.|halt|hatch|hail|hunt|halt 停止|1
+It takes two strong horses to ______ the heavy wagon up the muddy hill.|haul|heal|hint|hang|haul 用力拖拉|1
+Joint training exercises helped the two armies ______ a strong bond of trust over the years.|forge|forgive|forbid|forecast|forge ties 建立（關係）|1
+My brother spends his entire ______ on comic books within two days of receiving it.|allowance|allergy|alliance|alloy|allowance 零用錢；津貼|1
+She took an ______ English course, studying six hours a day for a month before the exam.|intensive|attentive|inclusive|impressive|intensive 密集的|1
+There is a ______ difference between the hot summer and the freezing winter in this city.|striking|strict|stable|steady|striking 驚人的|1
+After deducting taxes and insurance, his ______ salary of 60,000 dollars shrank to 48,000.|gross|growth|grocery|grain|gross 總的|1
+The singer was in her ______ at thirty, when she won every major award in the country.|prime|prize|prior|price|prime 最佳的；首要的|1
+The storm is expected to ______ overnight, so the coast guard warned sailors to stay in port.|intensify|identify|inform|inspire|intensify 加強|1
+Scientists launched a space ______ to study the thick clouds covering the planet Venus.|probe|probation|prospect|profit|probe 調查|1
+The tall stone ______ at the temple entrance has stood for more than a thousand years.|pillar|pillow|pilot|pitcher|pillar 支柱|1
+Saying you love peace while selling weapons is a clear ______ between your words and your actions.|contradiction|contribution|contraction|contrast|contradiction 矛盾|1
+Schools must not ______ against students because of their family background or religion.|discriminate|dominate|deteriorate|dedicate|discriminate against 歧視|1
+Armed police will ______ guard outside the embassy until the demonstration is over.|mount|mourn|mend|mingle|mount guard 站崗|1
+After months of practice, he finally hit his ______ in the race and passed five runners in a row.|stride|strike|strap|strain|hit one's stride 進入狀況|1
+The prisoners suffered ______ treatment, including beatings and hunger, in the old camp.|brutal|brilliant|brief|broad|brutal 殘酷的|1
+You must respect your teachers, and ______ they should respect you as a person.|likewise|otherwise|hence|though|likewise 同樣地|1
+Your request is still ______, so please be patient until the manager has read all the letters.|pending|pleasing|pressing|pouring|pending 待決的|1
+The doctor ordered a ______ test to see whether more detailed examinations were needed.|preliminary|premature|prosperous|precise|preliminary 初步的|1
+She is an ______ speaker who explains difficult ideas clearly in simple, vivid words.|articulate|artificial|artistic|accurate|articulate 口才好的|1
+The sign was ______: it showed an arrow pointing both ways, and drivers did not know where to turn.|ambiguous|ambitious|abundant|abrupt|ambiguous 模稜兩可的|1
+The robot is ______ of lifting objects ten times heavier than itself.|capable|capital|careful|comparable|capable of 有能力的|1
+We meet only for an ______ lunch, perhaps three or four times a year.|occasional|occupational|oral|optional|occasional 偶爾的|1
+A broken blood ______ under the skin caused the huge purple bruise on his arm.|vessel|vowel|valley|vault|vessel 船隻|1
+Warm air will ______ through the room if you turn on the fan near the ceiling.|circulate|calculate|cultivate|celebrate|circulate 流傳|1
+The company hopes to ______ waste heat from the factory to warm nearby homes in winter.|utilize|utter|unite|undo|utilize 利用|1
+The shop is a ______ monopoly in town, since nearly everyone buys groceries there.|virtual|virtuous|visible|vital|virtual 幾乎的；虛擬的|1
+Many people feel ______ at the sight of rats running through a restaurant kitchen.|disgust|disguise|disaster|dispute|disgust 厭惡|1
+When the rescue boat failed to appear, the sailors fell into ______ and stopped rowing.|despair|desert|dessert|despise|despair 絕望|1
+Rice is the ______ crop in this region, covering about eighty percent of its farmland.|principal|principle|primitive|productive|principal 主要的|1`.split("\n").map(l=>{const p=l.split("|");return{q:p[0],c:p[1],d:p.slice(2,5),z:p[5],f:+p[6]}});
+const $=id=>document.getElementById(id),sh=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+let wrong={s:[],m:[]};
+try{wrong=JSON.parse(localStorage.getItem("ew")||"")||wrong}catch(e){}
+const save=()=>{try{localStorage.setItem("ew",JSON.stringify(wrong))}catch(e){}renderWB()};
+const addW=(k,v)=>{if(!wrong[k].includes(v)){wrong[k].push(v);save()}},delW=(k,v)=>{wrong[k]=wrong[k].filter(x=>x!==v);save()};
+/* tabs */
+let rvOn=false;const tab=n=>{rvOn=false;for(const k of[1,2,3]){$("t"+k).classList.toggle("on",k==n);$("p"+k).classList.toggle("hide",k!=n)}if(n==3)renderWB()};
+for(const n of[1,2,3])$("t"+n).onclick=()=>tab(n);
+/* spelling */
+const SC=$("sc").innerHTML;
+let sl=[],si=0,sOk=0,sTry=0,cur,done=false,revealed=0;
+const speak=w=>{try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(w);u.lang="en-US";u.rate=.85;speechSynthesis.speak(u)}catch(e){}};
+function buildS(){const v=$("sf").value;let l=v=="w"?W.filter(x=>wrong.s.includes(x.w)):W.filter(x=>x.f>=+v);
+ sl=sh(l);si=0;sOk=0;sTry=0;showS()}
+function showS(){const f=$("fb1");f.classList.add("hide");$("pg1").style.width=sl.length?si/sl.length*100+"%":"0";
+ $("s1").textContent=sl.length?`第 ${Math.min(si+1,sl.length)} / ${sl.length} 題・答對 ${sOk}`:"";
+ if(!sl.length){$("sc").innerHTML=`<p>錯題本目前是空的，先去練習吧！</p>`;return}
+ if(si>=sl.length){$("sc").innerHTML=`<div class="res"><div class="big">${sOk} / ${sl.length}</div><p>本輪完成。答錯的字已加入錯題本。</p><button class="pri" onclick="buildSwrap()">再來一輪</button></div>`;return}
+ cur=sl[si];done=false;revealed=0;
+ $("zh").innerHTML=cur.z+(cur.f>1?`<span class="freq">${cur.f>=3?"🔥高頻・":""}考過 ${cur.f} 次</span>`:"");
+ $("pos").textContent=cur.w.length+" 個字母";$("inp").value="";$("inp").className="";$("inp").disabled=false;updHint();$("inp").focus();speak(cur.w)}
+function updHint(){$("hint").textContent=$("cb").checked?cur.w.split("").map((c,i)=>i<revealed?c:"_").join(" "):""}
+function next(){si++;showS()}
+function checkS(){if(done){next();return}const v=$("inp").value.trim().toLowerCase();if(!v)return;
+ const ok=v==cur.w||(cur.w=="catalogue"&&v=="catalog")||(cur.w=="mustache"&&v=="moustache");sTry++;done=true;
+ $("inp").className=ok?"ok":"bad";$("inp").disabled=true;const f=$("fb1");f.classList.remove("hide");
+ if(ok){sOk++;delW("s",cur.w);f.innerHTML=`✅ 答對了：<b>${cur.w}</b>　按 Enter 或「下一題」繼續`}
+ else{addW("s",cur.w);f.innerHTML=`❌ 正確拼法：<b>${cur.w}</b>（你寫的是 ${v}）　${dl(cur.w)}`}
+ $("chk").textContent="下一題"}
+function bind(){$("chk").onclick=()=>{if(done){$("chk").textContent="檢查";next()}else checkS()};
+ $("say").onclick=()=>speak(cur.w);
+ $("hnt").onclick=()=>{if(!done&&revealed<cur.w.length-1){revealed++;$("cb").checked=true;updHint()}};
+ $("skp").onclick=()=>{if(!done){done=true;addW("s",cur.w);$("inp").disabled=true;$("inp").className="bad";const f=$("fb1");f.classList.remove("hide");f.innerHTML=`正確拼法：<b>${cur.w}</b>`;$("chk").textContent="下一題"}else{$("chk").textContent="檢查";next()}};
+ $("inp").onkeydown=e=>{if(e.key=="Enter"){e.preventDefault();if(done){$("chk").textContent="檢查";next()}else checkS()}};
+ $("cb").onchange=()=>cur&&updHint()}
+bind();$("sf").onchange=()=>{location.hash="";buildSwrap()};
+function buildSwrap(){$("sc").innerHTML=SC;bind();buildS()}
+/* MC */
+let ml=[],mi=0,mOk=0,mDone=false;
+const NS=30;let seen=[];try{seen=JSON.parse(localStorage.getItem("es")||"[]")}catch(e){}
+const mark=q=>{if(!seen.includes(q)){seen.push(q);try{localStorage.setItem("es",JSON.stringify(seen))}catch(e){}}};
+const dl=w=>`<a href="https://dictionary.cambridge.org/dictionary/english-chinese-traditional/${encodeURIComponent(w)}" target="_blank" rel="noopener">查字典 ↗</a>`;
+function pickSet(pool,pri){const g={};for(const x of pool)(g[x.z]=g[x.z]||[]).push(x);
+ let l=sh(Object.keys(g)).map(k=>{const v=sh(g[k]);return v.find(x=>!seen.includes(x.q))||v[0]});
+ const r=x=>(pri.includes(x.z)?0:seen.includes(x.q)?2:1);l.sort((a,b)=>r(a)-r(b));return sh(l.slice(0,NS))}
+function setM(q,ok){wrong.m=wrong.m.filter(t=>{const y=Q.find(x=>x.q==t);return!(y&&y.z==q.z)});if(!ok)wrong.m.push(q.q);save()}
+function buildM(){const v=$("mf").value,wz=Q.filter(x=>wrong.m.includes(x.q)).map(x=>x.z);
+ ml=pickSet(v=="w"?Q.filter(x=>wz.includes(x.z)):v=="h"?Q.filter(x=>x.f>=2):Q,wz);mi=0;mOk=0;showM()}
+function showM(){$("pg2").style.width=ml.length?mi/ml.length*100+"%":"0";$("s2").textContent=ml.length?`第 ${Math.min(mi+1,ml.length)} / ${ml.length} 題・答對 ${mOk}`:"";
+ const c=$("mc");if(!ml.length){c.innerHTML="<p>沒有題目。先做幾題，答錯的會收進錯題本。</p>";return}
+ if(mi>=ml.length){c.innerHTML=`<div class="res"><div class="big">${mOk} / ${ml.length}</div><p>${mOk==ml.length?"全對！":"答錯的題目已加入錯題本，可選「錯題本」重練。"}</p><button class="pri" onclick="buildM()">再來一輪</button></div>`;return}
+ const q=ml[mi];mDone=false;mark(q.q);q.o=sh([q.c,...q.d]);q.a=q.o.indexOf(q.c);
+ c.innerHTML=`<div class="tag">${q.f>=3?"🔥高頻字・":""}該字在 107–114 年試卷出現約 ${q.f} 次</div><p class="q">${q.q}</p>`+q.o.map((o,i)=>`<button class="opt" data-i="${i}"><b>${"ABCD"[i]}</b>${o}</button>`).join("")+`<div id="fb2"></div>`;
+ c.querySelectorAll(".opt").forEach(b=>b.onclick=()=>pickM(+b.dataset.i))}
+function pickM(i){if(mDone)return;mDone=true;const q=ml[mi],b=document.querySelectorAll(".opt");
+ b[q.a].classList.add("right");if(i!=q.a)b[i].classList.add("wrong");
+ if(i==q.a)mOk++;setM(q,i==q.a);
+ $("fb2").innerHTML=`<div class="fb">${i==q.a?"✅ 正確":"❌ 答案是 "+"ABCD"[q.a]}：<b>${q.z}</b>　${dl(q.c)}</div><p><button class="pri" id="nx">下一題</button></p>`;
+ $("nx").onclick=()=>{mi++;showM()};$("nx").focus()}
+$("mf").onchange=buildM;$("mgo").onclick=buildM;
+function mis(w){const L="aeiou",o=new Set(),r=n=>Math.random()*n|0;
+ for(let t=0;t<60&&o.size<3;t++){let a=w.split(""),i=1+r(a.length-2),k=r(4),x;
+  if(k==0&&i<a.length-1)[a[i],a[i+1]]=[a[i+1],a[i]];
+  else if(k==1){if(a[i]==a[i+1])a.splice(i,1);else if(!L.includes(a[i]))a.splice(i,0,a[i])}
+  else if(k==2){const j=a.findIndex((c,n)=>n>0&&L.includes(c)&&n>=i)>=0?a.findIndex((c,n)=>n>0&&L.includes(c)&&n>=i):a.findIndex((c,n)=>n>0&&L.includes(c));if(j>0)a[j]=L.replace(a[j],"")[r(4)]}
+  else a.splice(i,1);
+  x=a.join("");if(x!=w)o.add(x)}return[...o]}
+function review(k){rvOn=true;let it=k=="s"?W.filter(x=>wrong.s.includes(x.w)).map(x=>({h:`「${x.z}」的正確拼法是哪一個？`,c:x.w,o:sh([x.w,...mis(x.w)]),say:x.w})):Q.filter(x=>wrong.m.includes(x.q)).map(x=>({h:`哪個字的意思是「${x.z.replace(/^[A-Za-z' .\-]+/,"")||x.z}」？`,c:x.c,o:sh([x.c,...x.d])}));
+ it=sh(it);let i=0,ok=0;const p=$("p3");
+ const show=()=>{if(i>=it.length){p.innerHTML=`<div class="card res"><div class="big">${ok} / ${it.length}</div><p>換題型後答對的字，可回錯題本按「已熟，移除」。</p><button class="pri" id="bk">返回錯題本</button></div>`;$("bk").onclick=()=>{rvOn=false;renderWB()};return}
+  const q=it[i];p.innerHTML=`<div class="card"><div class="bar"><span class="stat">換題型複習 ${i+1} / ${it.length}</span><span class="sp"></span><button id="bk">退出</button></div><p class="q">${q.h}</p>${q.say?'<p><button id="sy">🔊 聽發音</button></p>':""}`+q.o.map((o,j)=>`<button class="opt" data-i="${j}"><b>${"ABCD"[j]}</b>${o}</button>`).join("")+`<div id="rf"></div></div>`;
+  $("bk").onclick=()=>{rvOn=false;renderWB()};if(q.say)$("sy").onclick=()=>speak(q.say);let d=false;
+  p.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(d)return;d=true;const bs=p.querySelectorAll(".opt"),n=+b.dataset.i,a=q.o.indexOf(q.c);bs[a].classList.add("right");if(n!=a)b.classList.add("wrong");else ok++;
+   $("rf").innerHTML=`<div class="fb">${n==a?"✅ 正確":"❌ 正確答案"}：<b>${q.c}</b></div><p><button class="pri" id="nx">下一題</button></p>`;$("nx").onclick=()=>{i++;show()};$("nx").focus()})};
+ show()}
+function renderWB(){const sw=W.filter(x=>wrong.s.includes(x.w)),mw=Q.filter(x=>wrong.m.includes(x.q)),t=sw.length+mw.length;
+ $("bd").innerHTML=t?`<span class="cn">${t}</span>`:"";const p=$("p3");if(p.classList.contains("hide")||rvOn)return;
+ p.innerHTML=`<div class="card"><div class="bar"><b>拼字錯 (${sw.length})</b><span class="sp"></span>${sw.length?'<button class="pri" data-a="ps">練習這些字</button><button data-a="rvs">換題型複習</button><button data-a="cs">清空</button>':""}</div>`+
+ (sw.length?sw.map(x=>`<div class="wi"><div><b>${x.w}</b>　${x.z}${x.f>=3?" 🔥":""}</div><button data-a="say" data-v="${x.w}">🔊</button><button data-a="rs" data-v="${x.w}">已熟，移除</button></div>`).join(""):"<p class='stat'>目前沒有拼錯的字。</p>")+`</div>
+ <div class="card"><div class="bar"><b>詞彙單選錯 (${mw.length})</b><span class="sp"></span>${mw.length?'<button class="pri" data-a="pm">練習這些題</button><button data-a="rvm">換題型複習</button><button data-a="cm">清空</button>':""}</div>`+
+ (mw.length?mw.map((x,i)=>`<div class="wi"><div>${x.q.replace("______","<b>"+x.c+"</b>")}<br><span class="stat">${x.z}・錯誤選項：${x.d.join("、")}</span></div><button data-a="rm" data-v="${i}">移除</button></div>`).join(""):"<p class='stat'>目前沒有答錯的題目。</p>")+`</div>`;
+ p.onclick=e=>{const b=e.target.closest("button");if(!b)return;const a=b.dataset.a,v=b.dataset.v;
+  if(a=="say")speak(v);else if(a=="rs")delW("s",v);else if(a=="rm")delW("m",mw[+v].q);
+  else if(a=="cs"){if(confirm("清空拼字錯題？")){wrong.s=[];save()}}else if(a=="cm"){if(confirm("清空詞彙錯題？")){wrong.m=[];save()}}
+  else if(a=="rvs")review("s");else if(a=="rvm")review("m");else if(a=="ps"){$("sf").value="w";buildSwrap();tab(1)}else if(a=="pm"){$("mf").value="w";buildM();tab(2)}}}
+$("mf").options[0].text=`全部題庫（${Q.length} 題・每輪 ${NS} 題）`;buildS();buildM();renderWB();
+</script></body></html>
+
+# 英單王集訓營
+
+高中英文單字比賽練習網頁（單字拼寫＋詞彙單選＋錯題本）。
+純靜態網頁，只有 `index.html` 一個檔案，不需要建置或安裝。
+
+## 部署到 GitHub Pages
+1. 在 GitHub 建立新的 repository（例如 `vocab-trainer`）。
+2. 上傳 `index.html` 與 `README.md`。
+3. Settings → Pages → Source 選 `Deploy from a branch`，Branch 選 `main`、資料夾選 `/ (root)`，按 Save。
+4. 約 1–2 分鐘後，網址為 `https://<你的帳號>.github.io/vocab-trainer/`。
+
+## 修改題庫
+題目在 `index.html` 的 `const Q=` 區塊，格式為：
+`題幹|正確答案|誘答1|誘答2|誘答3|中文字義|考過次數`
+同一個字的不同題幹請使用相同的「中文字義」，錯題本才會自動換新題幹。
