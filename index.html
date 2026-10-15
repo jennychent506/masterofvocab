@@ -685,19 +685,3 @@ function renderWB(){const sw=W.filter(x=>wrong.s.includes(x.w)),mw=Q.filter(x=>w
   else if(a=="rvs")review("s");else if(a=="rvm")review("m");else if(a=="ps"){$("sf").value="w";buildSwrap();tab(1)}else if(a=="pm"){$("mf").value="w";buildM();tab(2)}}}
 $("mf").options[0].text=`全部題庫（${Q.length} 題・每輪 ${NS} 題）`;buildS();buildM();renderWB();
 </script></body></html>
-
-# 英單王集訓營
-
-高中英文單字比賽練習網頁（單字拼寫＋詞彙單選＋錯題本）。
-純靜態網頁，只有 `index.html` 一個檔案，不需要建置或安裝。
-
-## 部署到 GitHub Pages
-1. 在 GitHub 建立新的 repository（例如 `vocab-trainer`）。
-2. 上傳 `index.html` 與 `README.md`。
-3. Settings → Pages → Source 選 `Deploy from a branch`，Branch 選 `main`、資料夾選 `/ (root)`，按 Save。
-4. 約 1–2 分鐘後，網址為 `https://<你的帳號>.github.io/vocab-trainer/`。
-
-## 修改題庫
-題目在 `index.html` 的 `const Q=` 區塊，格式為：
-`題幹|正確答案|誘答1|誘答2|誘答3|中文字義|考過次數`
-同一個字的不同題幹請使用相同的「中文字義」，錯題本才會自動換新題幹。
